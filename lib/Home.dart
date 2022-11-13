@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -9,58 +10,51 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List<String> items = [
-    "Home",
-    "Explore",
-    "Search",
-    "Feed",
-    "Post",
-    "Activity",
-    "Setting",
-    "Profile",
-  ];
+  final percent = 0.8;
+  var duration = 2000;
+  String text = "80";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text("App Bar"),
         centerTitle: true,
-        title: Text("Home"),
-        leading: IconButton(
-            onPressed: () {}, icon: Icon(Icons.add_box_outlined)),
+        backgroundColor: Colors.deepPurple,
       ),
-      body: Container(
-        margin: const EdgeInsets.all(5),
-        width: double.infinity,
-        height: double.infinity,
-        child: Column(
-          children: [
-            SizedBox(
-              height: 60,
-              width: double.infinity,
-              child: ListView.builder(
-                physics: const BouncingScrollPhysics(),
-                itemCount: items.length,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: ((ctx, index) {
-                  return GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      margin: EdgeInsets.all(5),
-                      width: 80,
-                      height: 45,
-                      decoration: BoxDecoration(color: Colors.grey.shade300),
-                      child: Center(
-                        child: Text(
-                          items[index],
-                          style: GoogleFonts.laila(),
-                        ),
-                      ),
-                    ),
-                  );
-                }),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              new CircularPercentIndicator(
+                radius: 100,
+                lineWidth: 25,
+                backgroundColor: Colors.grey.shade300,
+                progressColor: Colors.teal,
+                animation: true,
+                animationDuration: duration,
+                percent: percent,
+                center: Text(
+                  text,
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.teal,
+                  ),
+                ),
+                circularStrokeCap: CircularStrokeCap.round,
               ),
-            )
-          ],
+              LinearPercentIndicator(
+                backgroundColor: Colors.grey.shade300,
+                progressColor: Colors.teal,
+                animation: true,
+                animationDuration: duration,
+                percent: percent,
+              ),
+            ],
+          ),
         ),
       ),
     );
