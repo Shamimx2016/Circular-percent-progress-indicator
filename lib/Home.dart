@@ -52,6 +52,8 @@ class _HomeState extends State<Home> {
                 animation: true,
                 animationDuration: duration,
                 percent: percent,
+                lineHeight: 25,
+                barRadius: Radius.circular(30),
               ),
             ],
           ),
